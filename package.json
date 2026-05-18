@@ -6,6 +6,7 @@
   "scripts": {
     "prepare": "effect-language-service patch && effect-tsgo patch",
     "dev": "bun src/index.ts",
+    "ai-tools": "bun src/ai-tools.ts",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "check": "tsgo --noEmit",

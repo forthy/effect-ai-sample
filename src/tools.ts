@@ -2,7 +2,7 @@ import { Tool, Toolkit } from "@effect/ai"
 import { Effect, Schema } from "effect"
 
 /**
- * Tool definition exposed to MCP clients for greeting a person by name.
+ * Tool definition used by MCP clients and language-model tool calling.
  *
  * The schema describes both sides of the tool contract: callers must provide a
  * string `name`, and the handler returns the rendered greeting as a string.
@@ -16,7 +16,7 @@ export const GreetingTool = Tool.make("Greeting", {
 })
 
 /**
- * Toolkit exposed by the MCP server.
+ * Toolkit shared by the MCP server and direct language-model calls.
  *
  * `Toolkit.make` preserves the tool names and handler types, so
  * `GreetingToolkitLive` must provide an implementation for the `Greeting` tool.
