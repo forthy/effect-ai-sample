@@ -3,9 +3,11 @@ import { createServer } from "node:http"
 import { McpServer } from "@effect/ai"
 import { HttpRouter } from "@effect/platform"
 import { NodeHttpServer, NodeRuntime } from "@effect/platform-node"
-import { Layer } from "effect"
+import { Config, Layer } from "effect"
 
 import { GreetingToolkit, GreetingToolkitLive } from "./tools"
+
+const ServerPort = Config.integer("SERVER_PORT").pipe(Config.withDefault(3000))
 
 /**
  * Registers the greeting toolkit with the MCP server.
@@ -28,7 +30,7 @@ const ServerLive = Layer.mergeAll(
       path: "/mcp",
     }),
   ),
-  Layer.provide(NodeHttpServer.layer(createServer, { port: 3000 })),
+  Layer.provide(NodeHttpServer.layerConfig(createServer, { port: ServerPort })),
 )
 
 Layer.launch(ServerLive).pipe(NodeRuntime.runMain)
